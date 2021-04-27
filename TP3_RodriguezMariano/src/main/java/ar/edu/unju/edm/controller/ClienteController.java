@@ -1,5 +1,8 @@
 package ar.edu.unju.edm.controller;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +40,12 @@ public String guardarNuevoProducto(@ModelAttribute("unCliente") Cliente nuevoCli
 	clienteService.guardarCliente(nuevoCliente);		
 	LOGGER.info("Tamaño del Listado: "+ clienteService.obtenerTodosClientes().size());
 	return "redirect:/cliente/mostrar";
+}
+public void trabajarConFechas() {
+	LocalDate fecha1 = clienteService.obtenerTodosClientes().get(0).getFechaNacimiento();
+	LocalDate fecha2 = LocalDate.now();
+	Period periodo = Period.between(fecha1,fecha2);
+	int dias = periodo.getDays();		
+	System.out.println("dias: "+dias);
 }
 }

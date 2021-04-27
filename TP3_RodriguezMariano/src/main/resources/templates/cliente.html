@@ -22,7 +22,10 @@
 		<br>
 		
 			<label for="tipo">Tipo</label> 
-			<input type="text" id="tipo" th:field="*{tipoDocumento}">
+			<select id="tipo" th:field"*{tipoDocumento}">
+			<option value="DNI">DNI</option>
+			<option value="Pasaporte">Pasaporte</option>
+			</select>
 		<br>
 		
 			<label for="codigo">Cod Area</label> 
@@ -60,6 +63,8 @@
 				      <th>Telefono</th>
 				      <th>Email</th>				      
 				      <th>Fecha Ultima Compra</th>
+				      <th>Edad</th>
+				      <th>Tiempo desde la ultima compra</th>
 				    </tr>
 					<tr th:each="cli : ${clientes}">
 						<td th:text="${cli.nombreApellido}"></td>
@@ -68,9 +73,11 @@
 						<td th:text="${cli.fechaNacimiento}"></td>
 						<td th:text="${#temporals.format(cli.fechaNacimiento,'dd/MM/yyyy')}"></td>
 						<td th:text="${cli.tipoDocumento}"></td>
-						<td th:text="${cli.codigoAreaTelefono}"  "${cli.numTelefono}"></td>
+						<td th:text="${cli.codigoAreaTelefono}+' - '+${cli.numTelefono}"></td>
 						<td th:text="${cli.email}"></td>						
 						<td th:text="${#temporals.format(cli.fechaUltimaCompra,'dd/MM/yyyy')}"></td>
+						<td th:text="${cli.getEdad()}"></td>
+						<td th:text="${cli.getTiempoDesdeUltimaCompra()}"></td>
 					</tr>
 				</table>
 			</div>
